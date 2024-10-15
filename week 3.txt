@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int n,r;
+struct frame
+{
+   char ack;
+   int data;
+}frame[10];
+int sender();
+void recack();
+void resend();
+int main()
+{
+   sender();
+   recack();
+   resend();
+   return 0;
+}
+int sender()
+{
+   int i;
+   printf("Enter the no.of frames to be sent");
+   scanf("%d",&n);
+   for (i=1;i<=n;i++)
+   {
+       printf("\nEnter dta for frames[%d]:",i);
+       scanf("%d",&frame[i].data);
+       frame[i].ack='y';
+   }
+return 0;
+}
+void recack()
+{
+   int i;
+   rand();
+   r=rand()%n;
+   frame[r].ack='n';
+   for(i=1;i<=n;i++)
+   {
+       if(frame[i].ack=='n')
+       printf("\n The frame number %d is not received",r);
+   }
+}
+void resend()
+{
+    int i;
+    printf("\n resending from frame %d",r);
+    for(i=r;i<=n;i++)
+    {
+        sleep(2);
+        frame[i].ack='y';
+        printf("\n Received data of frame %d is %d",i,frame[i].data);
+    }
+}
+ 
+OUTPUT:
+ 
+Enter the no.of frames to be sent4
+Enter data for frames[1]:10
+Enter data for frames[2]:20
+Enter data for frames[3]:30
+Enter data for frames[4]:40
+The frame number 2 is not received
+resending from frame 2
+Received data of frame 2 is 20
+Received data of frame 3 is 30
+Received data of frame 4 is 40
