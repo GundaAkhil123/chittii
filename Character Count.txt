@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+   char data[30],stuff_data[40];
+   int i,j,dsize,fsize,totalframes,tframe,s;
+   printf("Enter Data:");
+   scanf("%s",data);
+   dsize=strlen(data);
+   printf("Enter Frame Size:");
+   scanf("%d",&fsize);
+   tframe=fsize-1;
+   totalframes = (dsize/tframe) + 1;
+   s=fsize;
+   j=0;
+   for(i=0;i<(dsize+totalframes);i++)
+   {
+       if(i%fsize==0)
+       {
+           if((dsize-j)<fsize)
+           {
+               fsize=dsize-j+1;
+           }
+           stuff_data[i]=(char)(48+fsize);
+           fsize=s;
+       }
+       else
+       {
+           stuff_data[i]=data[j];
+           j++;
+       }
+   }
+   stuff_data[dsize+totalframes+1]='\0';
+   printf("Stuffed data is :%s",stuff_data);
+}
+ 
+OUTPUT-1:
+ 
+Enter Data:cybersecurity
+Enter Frame Size:5
+Stuffed data is :5cybe5rsec5urit2y
+ 
+OUTPUT-2:
+ 
+Enter Data:hihellowelcome
+Enter Frame Size:4
+Stuffed data is :4hih4ell4owe4lco3me

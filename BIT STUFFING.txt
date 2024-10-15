@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+   char data[30],stuff_data[40],delimiter[10]="01111110";
+   int i,j,count,len;
+   printf("Enter Data:");
+   scanf("%s",data);
+   len=strlen(data);
+   count=0;
+   j=0;
+   for(i=0;i<len;i++)
+   {
+       if(data[i]=='1')
+       {
+           count++;
+       }
+       else
+       {
+           count=0;
+       }
+       stuff_data[j]=data[i];
+       j++;
+       if(count==5 && data[i+1]=='1')
+       {
+           stuff_data[j]='0';
+           j++;
+           count=0;
+       }
+   }
+   stuff_data[j]='\0';
+   strcat(stuff_data,delimiter);
+   strcat(delimiter,stuff_data);
+   strcpy(stuff_data,delimiter);
+   printf("\nStuffed data is :%s",stuff_data);
+}
+ 
+OUTPUT-1:
+ 
+Enter Data:1011110
+Stuffed data is :01111110101111001111110
+ 
+OUTPUT-2:
+ 
+Enter Data:01011111101
+Stuffed data is :0111111001011111010101111110
